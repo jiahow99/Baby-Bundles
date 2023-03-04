@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 
 Auth::routes();
@@ -32,7 +32,6 @@ Route::post('/addToCart', [App\Http\Controllers\CartController::class, 'addToCar
 Route::get('/user/cart', [App\Http\Controllers\CartController::class, 'index'])->name('user.cart');
 Route::get('/user/cart/{product}/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('user.cart.remove');
 Route::get('/user/order/create', [App\Http\Controllers\OrderController::class, 'store'])->name('order.create');
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/user/shop', [App\Http\Controllers\ProductController::class, 'index'])->name('user.shop');
 Route::get('/user/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');

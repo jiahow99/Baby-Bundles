@@ -12,11 +12,16 @@
                 <div class="product card border-0" style="width:250px;">
                     <!-- Product image-->
                     <div class="overflow-hidden">
-                        {{-- <a href='{{route('product.profile', $product_item->id)}}'><img class='card-img-top' style='width:250px;height:260px;' src='{{$product_item->images->first()->src ?? ""}}'></a> --}}
                         <a 
                         href="javascript:void(0)"
                         id="show-product"
                         data-url={{ route('product.profile', $product_item->id) }}
+                        data-id={{ $product_item->id }}
+                        data-title={{ $product_item->title }}
+                        data-description={{ $product_item->description }}
+                        data-img={{ $product_item->images }}
+                        data-price={{ $product_item->price }}
+                        data-category={{ $product_item->category->name }}
                         >
                             <img class='card-img-top' style='width:250px;height:260px;' src='{{asset($product_item->images->first()->src)}}'>
                         </a>
@@ -215,26 +220,28 @@
             $('body').on('click', '#show-product', function(){
                 var productURL = $(this).data('url');
                 $('#productShowModal').modal('show');
-                $.get(productURL, function(data){
-                    $('#product-id').val(data.id)
-                    $('#product-title').text(data.title);
-                    $('#product-description').text(data.description);
-                    $('#product-price').text("RM " + data.price);
-                    $('#product-category').text("Category: " + data.category.name);
-                    $('#main_product_image').attr('src', data.image);
-                    $('#preview_product_image_1').attr('src', data.image);
-                    $('#preview_product_image_2').attr('src', data.image);
-                    $('#preview_product_image_3').attr('src', data.image);
-                    $('#preview_product_image_4').attr('src', data.image);
-                });
+                $('#product-id').val($(this).data('id'))
+                $('#product-title').text($(this).data('title'));
+                $('#product-description').text($(this).data('description'));
+                $('#product-price').text("RM " + $(this).data('price'));
+                $('#product-category').text("Category: " + $(this).data('category'));
+                $('#main_product_image').attr('src', "http://127.0.0.1:8000/" + $(this).data('img')[0].src  );
+                // $('#preview_product_image_1').attr('src', data.image);
+                // $('#preview_product_image_2').attr('src', data.image);
+                // $('#preview_product_image_3').attr('src', data.image);
+                // $('#preview_product_image_4').attr('src', data.image);
                 
             });
 
-            // Add To Cart (clicked)
+            // Add To Cart
             $('.addToCartBtn').click(function(e){
                 e.preventDefault();
+                
                 // Get Product ID
                 var product_id = $('#product-id').val();
+
+                $(this).text("Loading ...");
+
                 // Ajax Setup
                 $.ajaxSetup({
                     headers: {
@@ -259,6 +266,7 @@
                                 width: 500,
                                 padding: '3em',
                             })
+                            
                         }
                     },
                     // Item already in cart
@@ -272,6 +280,9 @@
                             width: 400,
                             padding: '3em',
                         })
+                    },
+                    complete: function(){
+                        $(".addToCartBtn").text("Add to Cart");
                     }
                 });
 

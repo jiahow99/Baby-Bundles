@@ -23,7 +23,7 @@ use App\Models\Category;
           <li class="nav-item mx-2 dropdown">
             <a class="nav-link text-uppercase dropdown-toggle pe-1" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
             <div class="dropdown-menu mt-lg-3 text-sm bg-light bg-opacity-75" aria-labelledby="navbarDropdownMenuLink" id="dropdown-menu">
-              <a class="dropdown-item" href="{{route('livewire.category', Category::whereSlug('top')->first()->id)}}">Top</a>
+              <a class="dropdown-item" href="{{route('category.index', Category::whereSlug('top')->first()->id)}}">Top</a>
               <a class="dropdown-item" href="{{route('category.index', Category::whereSlug('bottom')->first()->id)}}">Bottom</a>
               <a class="dropdown-item" href="{{route('category.index', Category::whereSlug('outfit')->first()->id)}}">Outfit</a>
               <a class="dropdown-item" href="{{route('category.index', Category::whereSlug('shoes')->first()->id)}}">Shoes</a>
