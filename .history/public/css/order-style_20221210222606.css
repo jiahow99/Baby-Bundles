@@ -1,0 +1,41 @@
+html,
+body,
+.intro {
+  height: 100%;
+}
+
+
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+thead th,
+tbody th {
+  color: rgb(66, 16, 16);
+}
+
+tbody td {
+  font-weight: 500;
+  color: rgba(255,255,255,.65);
+}
+
+.card {
+  border-radius: .5rem;
+}
+
+.bg-glass{
+    /* From https://css.glass */
+    background: rgba(184, 78, 78, 0.67);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.bg-blur{
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}

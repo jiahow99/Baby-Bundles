@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+use App\Models\Category;
+
+
+class ProductController extends Controller
+{
+    public function create(){
+        return view('product.create');
+    }
+
+    public function store(){
+        
+        $inputs = request()->validate([
+            'title' => 'required|min:8|max:255',
+            'price' => 'required|alpha_dash|',
+            'description' => 'nullable',
+        ]);
+
+        // $category = Category::whereSlug(request('category'))->first()->id;
+        $top = Category::whereSlug('top')->first()->id;
+
+        $user = Auth::user();
+        $new_product = $user->products()->create($inputs);
+        $new_product->update(['category_id' => $top])
+        // $top = Category::whereSlug('top')->first();
+        // $top->products()->create($inputs);
+        // dd($inputs);
+    }
+}

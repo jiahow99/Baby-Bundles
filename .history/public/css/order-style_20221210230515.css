@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+.intro {
+  height: 100%;
+}
+
+
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  
+}
+
+
+thead th,
+tbody th {
+  color: rgb(0, 0, 0);
+}
+
+tbody td {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.card {
+  border-radius: .5rem;
+}
+
+.orderid{
+    font-size: larger;
+}
+
+
+.bg-blur{
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
+.pt-6{
+    padding-top:100px;
+    padding-bottom:100px;
+}
+
+.btn-track{
+    font-size: 14px;
+    background-color: greenyellow;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family:Arial, Helvetica, sans-serif;
+    letter-spacing: 3px;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn-track:hover{
+    background-color: rgb(129, 194, 31);
+    transition: .4s;
+}
