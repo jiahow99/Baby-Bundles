@@ -47,8 +47,9 @@
                             <div class="row">
                                 <span class="col-9 justify-content-start product-price-card">RM {{$product_item->price}}</span>
                             </div>
+                            <span id="product_title" class="d-none">{{ $product_item->title }}</span>
+                            <span id="product_description" class="d-none">{{ $product_item->description }}</span>
                         </div>
-                        
                     </div>
                     <!-- Product actions-->
                     
@@ -128,8 +129,14 @@
                                 <a class="btn-add">
                                     Buy Now
                                 </a>
-                                <button class="btn-outline-add addToCartBtn" style="border-width: 3px;">
+                                {{-- <button class="btn-outline-add addToCartBtn" style="border-width: 3px;">
                                     Add to Cart
+                                </button> --}}
+                                <button class="add-to-cart">
+                                    <span class="text">Add To Cart</span>
+                                    <span class="spinner">
+                                        <div class="loader"></div>
+                                    </span>
                                 </button>
                                 <input type="hidden" id="product-id" value="">
                             </div>
@@ -221,8 +228,8 @@
                 var productURL = $(this).data('url');
                 $('#productShowModal').modal('show');
                 $('#product-id').val($(this).data('id'))
-                $('#product-title').text($(this).data('title'));
-                $('#product-description').text($(this).data('description'));
+                $('#product-title').text($('#product_title').text());
+                $('#product-description').text($('#product_description').text());
                 $('#product-price').text("RM " + $(this).data('price'));
                 $('#product-category').text("Category: " + $(this).data('category'));
                 $('#main_product_image').attr('src', "http://127.0.0.1:8000/" + $(this).data('img')[0].src  );
