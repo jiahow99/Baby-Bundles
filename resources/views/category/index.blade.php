@@ -18,7 +18,6 @@
                         data-url={{ route('product.profile', $product_item->id) }}
                         data-id={{ $product_item->id }}
                         data-title={{ $product_item->title }}
-                        data-description={{ $product_item->description }}
                         data-img={{ $product_item->images }}
                         data-price={{ $product_item->price }}
                         data-category={{ $product_item->category->name }}
@@ -47,8 +46,8 @@
                             <div class="row">
                                 <span class="col-9 justify-content-start product-price-card">RM {{$product_item->price}}</span>
                             </div>
-                            <span id="product_title" class="d-none">{{ $product_item->title }}</span>
-                            <span id="product_description" class="d-none">{{ $product_item->description }}</span>
+                            <span id="product_title_{{$product_item->id}}" class="d-none">{{ $product_item->title }}</span>
+                            <span id="product_description_{{$product_item->id}}" class="d-none">{{ $product_item->description }}</span>
                         </div>
                     </div>
                     <!-- Product actions-->
@@ -138,7 +137,7 @@
                                         <div class="loader"></div>
                                     </span>
                                 </button>
-                                <input type="hidden" id="product-id" value="">
+                                <input type="hidden" id="selected-product-id" value="">
                             </div>
                 
                             <!-- Accordian -->
@@ -225,11 +224,18 @@
         // Product Modal Show
         $(document).ready(function(){
             $('body').on('click', '#show-product', function(){
-                var productURL = $(this).data('url');
-                $('#productShowModal').modal('show');
-                $('#product-id').val($(this).data('id'))
-                $('#product-title').text($('#product_title').text());
-                $('#product-description').text($('#product_description').text());
+                $('#productShowModal').modal('show');   // Show modal
+                
+                let productURL = $(this).data('url');   // Add to cart (url)
+                let product_id = $(this).data('id');    
+
+                let get_by_title = '#product_title_' + product_id;
+                let get_by_description = '#product_description_' + product_id;
+
+                $('#product-title').text($(get_by_title).text());
+                $('#product-description').text($(get_by_description).text());
+
+                $('#selected-product-id').val($(this).data('id'))   // Selected product(id)
                 $('#product-price').text("RM " + $(this).data('price'));
                 $('#product-category').text("Category: " + $(this).data('category'));
                 $('#main_product_image').attr('src', "http://127.0.0.1:8000/" + $(this).data('img')[0].src  );
@@ -241,13 +247,14 @@
             });
 
             // Add To Cart
-            $('.addToCartBtn').click(function(e){
+            $('.add-to-cart').click(function(e){
                 e.preventDefault();
                 
                 // Get Product ID
-                var product_id = $('#product-id').val();
+                var product_id = $('#selected-product-id').val();
 
-                $(this).text("Loading ...");
+                // Loading animation
+                $(this).addClass('loading');
 
                 // Ajax Setup
                 $.ajaxSetup({
@@ -289,7 +296,7 @@
                         })
                     },
                     complete: function(){
-                        $(".addToCartBtn").text("Add to Cart");
+                        $('.add-to-cart').removeClass('loading');
                     }
                 });
 
