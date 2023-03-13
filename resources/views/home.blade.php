@@ -37,6 +37,85 @@ use App\Models\Category;
   <livewire:navigation />
 
   <body>
+
+    {{-- Start Cart Sidebar --}}
+    <div class="p-0 m-0 position-fixed sidebar-cart">
+      <div class="col-12 pt-3 px-2 m-0">
+        <div class="col-11 p-0 m-0 mx-auto">
+          {{-- Cart header --}}
+          <div class="header col-12 p-0 m-0 mb-2 row justify-content-between">
+            <span class="col-5 p-0 m-0">Shopping Cart</span>
+            <span class="col-1 p-0 m-0">X</span>
+          </div>
+          <hr class="col-12 p-0 m-0 mb-3"></hr>
+          <div class="col-12 p-0 m-0 view-cart btn btn-primary text-center py-2 mb-4">View Cart</div>
+          {{-- Cart items --}}
+          <div class="product col-12 row justify-content-between p-0 m-0 mb-4">
+            <div class="product-image col-3 p-0 m-0">
+              <div class="col-12 p-0 m-0"><img src="{{asset('img/outfit/outfit01.jpg')}}" alt="" width="100%"></div>
+            </div>
+            <div class="product-details col-6 p-0 m-0">
+              <div class="col-12 p-0 m-0">Product Title</div>
+              <div class="col-12 p-0 m-0">Product Price</div>
+              <div class="col-12 p-0 m-0">Maybe Quantity?</div>
+            </div>
+            <div class="remove col-2 p-0 m-0 text-right">
+              <span>X</span>
+            </div>
+          </div>
+          <hr class="col-12 p-0 m-0"></hr>
+
+          <div class="product col-12 row justify-content-between p-0 m-0 mb-4">
+            <div class="product-image col-3 p-0 m-0">
+              <div class="col-12 p-0 m-0"><img src="{{asset('img/outfit/outfit01.jpg')}}" alt="" width="100%"></div>
+            </div>
+            <div class="product-details col-6 p-0 m-0">
+              <div class="col-12 p-0 m-0">Product Title</div>
+              <div class="col-12 p-0 m-0">Product Price</div>
+              <div class="col-12 p-0 m-0">Maybe Quantity?</div>
+            </div>
+            <div class="remove col-2 p-0 m-0 text-right">
+              <span>X</span>
+            </div>
+          </div>
+          <hr class="col-12 p-0 m-0"></hr>
+
+          <div class="product col-12 row justify-content-between p-0 m-0 mb-4">
+            <div class="product-image col-3 p-0 m-0">
+              <div class="col-12 p-0 m-0"><img src="{{asset('img/outfit/outfit01.jpg')}}" alt="" width="100%"></div>
+            </div>
+            <div class="product-details col-6 p-0 m-0">
+              <div class="col-12 p-0 m-0">Product Title</div>
+              <div class="col-12 p-0 m-0">Product Price</div>
+              <div class="col-12 p-0 m-0">Maybe Quantity?</div>
+            </div>
+            <div class="remove col-2 p-0 m-0 text-right">
+              <span>X</span>
+            </div>
+          </div>
+          <hr class="col-12 p-0 m-0"></hr>
+
+          <div class="product col-12 row justify-content-between p-0 m-0 mb-4">
+            <div class="product-image col-3 p-0 m-0">
+              <div class="col-12 p-0 m-0"><img src="{{asset('img/outfit/outfit01.jpg')}}" alt="" width="100%"></div>
+            </div>
+            <div class="product-details col-6 p-0 m-0">
+              <div class="col-12 p-0 m-0">Product Title</div>
+              <div class="col-12 p-0 m-0">Product Price</div>
+              <div class="col-12 p-0 m-0">Maybe Quantity?</div>
+            </div>
+            <div class="remove col-2 p-0 m-0 text-right">
+              <span>X</span>
+            </div>
+          </div>
+          <hr class="col-12 p-0 m-0"></hr>
+        </div>
+        
+      </div>
+    </div>
+    {{-- End Cart Sidebar --}}
+
+
     <!-- navbar-->
     <!-- Hero Slider -->
     <section>

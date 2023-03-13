@@ -46,10 +46,11 @@
             @if (Auth::check())
                 
             <li>
-                <a class="btn btn-outline-dark px-4 ms-lg-3 py-2" href="{{route('user.cart')}}" style="padding-top: 0.37rem;padding-bottom: 0.37rem;">
+                {{-- <a class="btn btn-outline-dark px-4 ms-lg-3 py-2" href="{{route('user.cart')}}" style="padding-top: 0.37rem;padding-bottom: 0.37rem;">
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill" id="cartItemQuantity">{{Auth::user()->cart->product_qty ?? 0}}</span>
-                </a>
+                </a> --}}
+                <div id="cart-toggler" class="btn btn-outline-dark">Cart</div>
             </li>
   
               <!-- User account dropdown -->
@@ -73,4 +74,10 @@
       </div>
     </div>
 </nav>
+
+<script>
+  document.querySelector("#cart-toggler").addEventListener("click", function(){
+    document.querySelector(".sidebar-cart").style.width = "28%";
+  });
+</script>
   
