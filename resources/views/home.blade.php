@@ -23,9 +23,13 @@ use App\Models\Category;
     <link rel="stylesheet" href="{{asset('css/style.default.css')}}" id="theme-stylesheet">
     <!-- Favicon-->
     <link rel="shortcut icon" href="{{asset('img/favicon.png')}}">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     {{-- Custom CSS --}}
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('css/header-style.css')}}">
+    {{-- Font awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @livewireScripts
     @livewireStyles
@@ -41,74 +45,17 @@ use App\Models\Category;
     {{-- Start Cart Sidebar --}}
     <div class="p-0 m-0 position-fixed sidebar-cart">
       <div class="col-12 pt-3 px-2 m-0">
-        <div class="col-11 p-0 m-0 mx-auto">
+        <div class="col-11 p-0 m-0 mx-auto" id="sidebar_cart_container">
           {{-- Cart header --}}
           <div class="header col-12 p-0 m-0 mb-2 row justify-content-between">
             <span class="col-5 p-0 m-0">Shopping Cart</span>
-            <span class="col-1 p-0 m-0">X</span>
+            <span id="close_sidebar_cart" class="col-2 row m-0 close justify-content-center align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
+            </span>
           </div>
           <hr class="col-12 p-0 m-0 mb-3"></hr>
-          <div class="col-12 p-0 m-0 view-cart btn btn-primary text-center py-2 mb-4">View Cart</div>
-          {{-- Cart items --}}
-          <div class="product col-12 row justify-content-between p-0 m-0 mb-4">
-            <div class="product-image col-3 p-0 m-0">
-              <div class="col-12 p-0 m-0"><img src="{{asset('img/outfit/outfit01.jpg')}}" alt="" width="100%"></div>
-            </div>
-            <div class="product-details col-6 p-0 m-0">
-              <div class="col-12 p-0 m-0">Product Title</div>
-              <div class="col-12 p-0 m-0">Product Price</div>
-              <div class="col-12 p-0 m-0">Maybe Quantity?</div>
-            </div>
-            <div class="remove col-2 p-0 m-0 text-right">
-              <span>X</span>
-            </div>
-          </div>
-          <hr class="col-12 p-0 m-0"></hr>
+          <a class="col-12 p-0 m-0 view-cart btn btn-primary text-center py-2 mb-4" href="{{ route('user.cart') }}">View Cart</a>
 
-          <div class="product col-12 row justify-content-between p-0 m-0 mb-4">
-            <div class="product-image col-3 p-0 m-0">
-              <div class="col-12 p-0 m-0"><img src="{{asset('img/outfit/outfit01.jpg')}}" alt="" width="100%"></div>
-            </div>
-            <div class="product-details col-6 p-0 m-0">
-              <div class="col-12 p-0 m-0">Product Title</div>
-              <div class="col-12 p-0 m-0">Product Price</div>
-              <div class="col-12 p-0 m-0">Maybe Quantity?</div>
-            </div>
-            <div class="remove col-2 p-0 m-0 text-right">
-              <span>X</span>
-            </div>
-          </div>
-          <hr class="col-12 p-0 m-0"></hr>
-
-          <div class="product col-12 row justify-content-between p-0 m-0 mb-4">
-            <div class="product-image col-3 p-0 m-0">
-              <div class="col-12 p-0 m-0"><img src="{{asset('img/outfit/outfit01.jpg')}}" alt="" width="100%"></div>
-            </div>
-            <div class="product-details col-6 p-0 m-0">
-              <div class="col-12 p-0 m-0">Product Title</div>
-              <div class="col-12 p-0 m-0">Product Price</div>
-              <div class="col-12 p-0 m-0">Maybe Quantity?</div>
-            </div>
-            <div class="remove col-2 p-0 m-0 text-right">
-              <span>X</span>
-            </div>
-          </div>
-          <hr class="col-12 p-0 m-0"></hr>
-
-          <div class="product col-12 row justify-content-between p-0 m-0 mb-4">
-            <div class="product-image col-3 p-0 m-0">
-              <div class="col-12 p-0 m-0"><img src="{{asset('img/outfit/outfit01.jpg')}}" alt="" width="100%"></div>
-            </div>
-            <div class="product-details col-6 p-0 m-0">
-              <div class="col-12 p-0 m-0">Product Title</div>
-              <div class="col-12 p-0 m-0">Product Price</div>
-              <div class="col-12 p-0 m-0">Maybe Quantity?</div>
-            </div>
-            <div class="remove col-2 p-0 m-0 text-right">
-              <span>X</span>
-            </div>
-          </div>
-          <hr class="col-12 p-0 m-0"></hr>
         </div>
         
       </div>
@@ -118,7 +65,7 @@ use App\Models\Category;
 
     <!-- navbar-->
     <!-- Hero Slider -->
-    <section>
+    <section class="blur-me">
       <div class="swiper hero-slider">
         <div class="swiper-wrapper" >
           <!-- Hero Slide-->
@@ -173,7 +120,7 @@ use App\Models\Category;
       </div>
     </section>
 
-    <section class=" bg-light" id="categories">
+    <section class=" bg-light blur-me" id="categories">
       <p class="h4 mt-4 text-uppercase text-primary mb-3 text-center">Categories</p>
 
       <div class="mx-5 mt-4">
@@ -226,7 +173,7 @@ use App\Models\Category;
     </section>
 
     <!-- Featured Products -->
-    <section id="featured-product">
+    <section id="featured-product" class="blur-me">
       <div class="container">
         <p class="h4 mt-5 text-uppercase text-primary mb-3 text-center">Featured Product</p>
         <div class="row gx-0 mb-5">
@@ -263,7 +210,7 @@ use App\Models\Category;
   
     
     <!-- Features Section -->
-    <section class="py-5 bg-light" id="about">
+    <section class="py-5 bg-light" id="about" class="blur-me">
       <div class="container py-5">
         <div class="row">
           <div class="col-lg-6 order-2 order-lg-1">
@@ -327,7 +274,7 @@ use App\Models\Category;
     </section>
     
     <!-- Testimonials Section-->
-    <section class="py-5">
+    <section class="py-5" class="blur-me">
       <div class="container py-5">
         <p class="h6 mb-1 text-uppercase text-primary mb-3">Our customers say</p>
         <div class="row mb-5">

@@ -45,13 +45,19 @@
             <!-- if logged in -->
             @if (Auth::check())
                 
-            <li>
-                {{-- <a class="btn btn-outline-dark px-4 ms-lg-3 py-2" href="{{route('user.cart')}}" style="padding-top: 0.37rem;padding-bottom: 0.37rem;">
+            {{-- <li id="cart-toggler">
+                <a class="btn btn-outline-dark px-4 ms-lg-3 py-2" href="{{route('user.cart')}}" style="padding-top: 0.37rem;padding-bottom: 0.37rem;">
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill" id="cartItemQuantity">{{Auth::user()->cart->product_qty ?? 0}}</span>
-                </a> --}}
-                <div id="cart-toggler" class="btn btn-outline-dark">Cart</div>
-            </li>
+                </a>
+            </li> --}}
+
+            <li id="cart-toggler" data-url="{{route('product.sidebarcart')}}">
+              <div class="btn btn-outline-dark px-4 ms-lg-3 py-2" style="padding-top: 0.37rem;padding-bottom: 0.37rem;">
+                  Cart
+                  <span class="badge bg-dark text-white ms-1 rounded-pill" id="cartItemQuantity">{{Auth::user()->cart->product_qty ?? 0}}</span>
+              </div>
+          </li>
   
               <!-- User account dropdown -->
               <li class="nav-item dropdown mx-lg-3 col-2 col-lg-1" >
@@ -74,10 +80,3 @@
       </div>
     </div>
 </nav>
-
-<script>
-  document.querySelector("#cart-toggler").addEventListener("click", function(){
-    document.querySelector(".sidebar-cart").style.width = "28%";
-  });
-</script>
-  

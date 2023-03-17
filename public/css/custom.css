@@ -4,6 +4,10 @@
     z-index: 3;
 }
 
+.blur-bg{
+    filter: blur(5px);
+}
+
 .sidebar-cart{
     background-color: #FAF9F6;
     top :0;
@@ -11,7 +15,21 @@
     height: 100%;
     /* width: 28%; */
     width: 0;
-    overflow: hidden;
+    overflow: scroll;
     transition: 0.5s;
     z-index: 9999999999999;
 }
+
+.sidebar-cart .close{
+    cursor: pointer;
+}
+
+.sidebar-cart .remove i{
+  transition: .2s;
+}
+
+.sidebar-cart .remove i:hover{
+  color: var(--bs-primary);;
+  cursor: pointer;
+}
+

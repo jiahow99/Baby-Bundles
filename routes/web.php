@@ -31,6 +31,7 @@ Route::get('/product/{product}', [App\Http\Controllers\ProductController::class,
 Route::post('/addToCart', [App\Http\Controllers\CartController::class, 'addToCart'])->name('cart.addToCart');
 Route::get('/user/cart', [App\Http\Controllers\CartController::class, 'index'])->name('user.cart');
 Route::get('/user/cart/{product}/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('user.cart.remove');
+Route::get('/user/cart/{product}/remove/sidecart', [App\Http\Controllers\CartController::class, 'remove_sidecart'])->name('user.cart.remove.sidecart');
 Route::get('/user/order/create', [App\Http\Controllers\OrderController::class, 'store'])->name('order.create');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/user/shop', [App\Http\Controllers\ProductController::class, 'index'])->name('user.shop');
@@ -43,6 +44,9 @@ Route::get('/order', [App\Http\Controllers\OrderController::class, 'test']);
 Route::get('/livewire', function(){
     return view('livewire.test');
 });
+
+Route::get('/user/fetch/sidebarcart', [App\Http\Controllers\CartController::class, 'fetch_sidebar_cart'])->name('product.sidebarcart');
+
 
 
 // Route::get('/user/fetch/cart', [App\Http\Controllers\CartController::class, 'fetch_cart_items'])->name('user.fetch.cart');

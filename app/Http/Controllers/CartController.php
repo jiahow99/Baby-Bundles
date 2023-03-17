@@ -33,6 +33,32 @@ class CartController extends Controller
     }
 
 
+    public function fetch_sidebar_cart(){
+        // Get User's Products
+        $user = Auth::user();
+        $cart_items = $user->cart->products()->with('images', 'category')->get();
+
+        // Cart Item Quantity
+        $item_quantity = $user->cart->product_qty; 
+
+        $total = 0;
+
+        // Add Image Src to Array
+        foreach($cart_items as $item){
+            $item['src'] = $item->images->first()->src;
+            $total += $item->price;
+        }
+
+        $data = [
+            "products" => $cart_items,
+            "item_quantity" => $item_quantity,
+            "total" => $total
+        ];
+
+        return response()->json($data);
+    }
+
+
     public function fetch_cart_items(){
 
         $user = Auth::user();
@@ -103,6 +129,19 @@ class CartController extends Controller
 
         session()->flash('deleted', $product->title.' are removed');
         return back();
+
+    }
+
+    public function remove_sidecart(Product $product){
+        
+        $cart = Auth::user()->cart;
+        $cart->products()->detach($product);
+        
+        // Update Quantity
+        $cart->product_qty = count($cart->products);
+        $cart->save();
+
+        return response()->json(['status' => 'success']);
 
     }
 }
