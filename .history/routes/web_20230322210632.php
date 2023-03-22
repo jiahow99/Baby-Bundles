@@ -20,10 +20,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/cart/{product}/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('user.cart.remove');
     Route::get('/user/cart/{product}/remove/sidecart', [App\Http\Controllers\CartController::class, 'remove_sidecart'])->name('user.cart.remove.sidecart');
 
+    // User
+
     // Order
     Route::get('/user/order/create', [App\Http\Controllers\OrderController::class, 'store'])->name('order.create');
 
-    // User
     Route::get('/user/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{user}/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
 });
