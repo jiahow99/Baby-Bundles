@@ -67,68 +67,6 @@ class ProductController extends Controller
         if($validated){
             return redirect()->route('category.index', $category_id);
         }
-
-        // return view('category.index');
-
-
-        // if($validator->fails()){
-        //     // Got errors
-        //     return back()->withInput();
-
-        // }else{
-        //     // No errors
-        //     if(request()->hasFile('image')){
-        //         $directory = 'img/'.request('category');
-        //         $image_name = request('image')->getClientOriginalName();
-    
-        //         // Store in public/...
-        //         $path = request('image')->storeAs($directory, $image_name, 'public_uploads');
-        //     }
-            
-        //     // Category Id
-        //     $category_id = Category::whereSlug(strtolower(request('category')))->first()->id;
-
-        //     // Create Product
-        //     $user = Auth::user();
-        //     $new_product = $user->products()->create($inputs);
-
-        //     // Create Image
-        //     $image = ['src' => $path];
-        //     $new_product->images()->create($image);
-
-        //     // Set Category
-        //     $new_product->category_id = $category_id;
-        //     $new_product->save();
-
-        //     return view('category.index');
-        // }
-
-
-        // if(request()->hasFile('image')){
-        //     $directory = 'img/'.request('category');
-        //     $image_name = request('image')->getClientOriginalName();
-
-        //     // Store in public/...
-        //     $path = request('image')->storeAs($directory, $image_name, 'public_uploads');
-        // }
-
-
-        // // Category Id
-        // $category_id = Category::whereSlug(strtolower(request('category')))->first()->id;
-
-        // // Create Product
-        // $user = Auth::user();
-        // $new_product = $user->products()->create($inputs);
-
-        // // Create Image
-        // $image = ['src' => $directory];
-        // $new_product->images()->create($image);
-
-        // // Set Category
-        // $new_product->category_id = $category_id;
-        // $new_product->save();
-
-        // return back()->withInput();
     }
 
 
@@ -142,7 +80,18 @@ class ProductController extends Controller
         $product['image'] = asset($src);
         
         return response()->json($product);
+    }
 
+
+    public function filter(Request $request){
+        $request->validate([
+            'min' => 'required',
+            'max' => 'required',
+        ]);
+
+        $products = Product::whereBetween('price', [ request('min'), request('max') ])->with('images')->get()->shuffle()->take(50);
+        return view('user.shop', compact('products'));
+        
     }
 
 }

@@ -34,19 +34,95 @@
         
         {{-- Main Content --}}
         <section style="padding-top:90px">
-            <div class="row px-5">
+            <form  action="{{ route('product.filter') }}" method="post"class="row px-5">
                 <!-- Filter-->
-                <div class="col-3 card pt-4">
-                    <div class="text-center">
-                        <h3 class="text-primary">Filter</h3>
+                    @csrf
+                    <div class="col-3 card p-0 pt-4">
+                        <div class="col-10 m-0 p-0 mx-auto">
+                            <div class="text-center">
+                                <h3 class="text-primary">Filter</h3>
+                            </div>
+                            <div class="mt-3">
+                                <h5>Price</h5>
+                                <div id="price-range-select" class="d-flex align-items-center justify-content-between ">
+                                    <button class="btn btn-outline-primary" >RM 0 - 50</button>
+                                    <button class="btn btn-outline-primary" >RM 50 - 150</button>
+                                    <button class="btn btn-outline-primary" >RM 100 - 200</button>
+                                </div>
+                                {{-- Price Range --}}
+                                <div id="price-range" class="d-flex justify-content-between align-items-center mt-3">
+                                    <select class="form-select" style="width: 40%;" name="min" >
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                    </select>
+                                    <span class="mx-3">-</span>
+                                    <select class="form-select" style="width: 40%;" name="max" >
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                        <option value="60">60</option>
+                                    </select>
+                                    <button class="btn btn-primary p-0 py-2 px-4 ms-3" onclick="document.getElementById('form-id').submit();" style="border-radius: 10px; ">Filter</button>
+                                </div>
+                                {{-- Categories --}}
+                                <div id="categories" class="mt-3">
+                                    <h5>Categories</h5>
+                                    <div class="ps-3">
+                                        <a href="#" class="d-block py-2 text-lg ">Top</a>
+                                        <a href="#" class="d-block py-2 text-lg ">Bottom</a>
+                                        <a href="#" class="d-block py-2 text-lg ">Outfit</a>
+                                        <a href="#" class="d-block py-2 text-lg ">Shoes</a>
+                                    </div>
+                                </div>
+                                {{-- Condition --}}
+                                <div id="condition" class="mt-3">
+                                    <h5>Condition</h5>
+                                    <div class="ps-3">
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value="" id="Like New">
+                                            <label class="form-check-label" for="Like New">
+                                            Like New
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value="" id="Very Good">
+                                            <label class="form-check-label" for="Very Good">
+                                            Very Good
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value="" id="Good">
+                                            <label class="form-check-label" for="Good">
+                                            Good
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value="" id="Poor">
+                                            <label class="form-check-label" for="Poor">
+                                            Poor
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="Very Poor">
+                                            <label class="form-check-label" for="Very Poor">
+                                            Very Poor
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <livewire:filter />
-                </div>
                 <!-- Products-->
-                <div class="col-9 px-1">
+                <div class="col-9 px-5">
                     @yield('product')
                 </div>
-            </div>
+            </form>
         </section>
         <!-- Footer-->
         <x-header.footer></x-header.footer>

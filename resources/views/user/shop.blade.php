@@ -9,14 +9,14 @@
 
 @section('product')
 
-<div class="row justify-content-start">
+<div class="row justify-content-around mx-auto">
 
     @foreach ($products as $product_item)
         <div class="col-3 mb-4">
             <div class="product card border-0" style="width:250px;">
                 <!-- Product image-->
                 <div class="overflow-hidden">
-                    <a href='{{route('product.profile', $product_item->id)}}'><img class='card-img-top' style='width:250px;height:260px;' src='{{$product_item->images->first()->src ?? ""}}'></a>
+                    <a href='{{ route('product.profile', $product_item->id) }}'><img src='{{ asset($product_item->images->first()->src ?? "") }}' class='card-img-top' style='width:250px;height:260px;' ></a>
                 </div>
                 <!-- Product details-->
                 <div class="card-body pt-3 pb-3" style="height:120px;">

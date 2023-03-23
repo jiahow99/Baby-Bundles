@@ -6,7 +6,7 @@
 
     @section('product')
 
-    <div class="row justify-content-start">
+    <div class="row justify-content-around mx-auto">
         @foreach ($products as $product_item)
             <div class="col-3 mb-4">
                 <div class="product card border-0" style="width:250px;">

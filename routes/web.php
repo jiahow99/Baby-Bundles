@@ -37,6 +37,7 @@ Route::get('/products/{category}', [App\Http\Controllers\CategoryController::cla
 // Product
 Route::get('/product/{product}', [App\Http\Controllers\ProductController::class, 'profile'])->name('product.profile');
 Route::get('/user/shop', [App\Http\Controllers\ProductController::class, 'index'])->name('user.shop');
+Route::post('/product/filter', [App\Http\Controllers\ProductController::class, 'filter'])->name('product.filter');
 
 // User
 Route::get('/user/order/index', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
