@@ -69,43 +69,43 @@
                         <div class="row">
                             <div class="col"><h4><b>Shopping Cart</b></h4></div>
                             <!-- Total item quantity -->
-                            <div class="col align-self-center text-right text-muted">{{$item_quantity}} items</div>
+                            <div class="col align-self-center text-right text-muted">@isset($item_quantity)
+                                {{ $item_quantity }}
+                            @endisset items</div>
                         </div>
                     </div>
                     <div class="row border-top"></div>
-                    {{-- Empty Card --}}
-                    @if ($cart_items->isEmpty())
-
+                    
+                    @if (isset($cart_items))
+                        @foreach ($cart_items as $item)
+                            <div class="row border-bottom">
+                                <div class="row main align-items-center"> 
+                                    <div class="col-3"><img class="img-fluid" src="{{asset($item->images->first()->src)}}">
+                                    </div> 
+                                    <div class="col">
+                                        <div class="row text-muted">
+                                        {{$item->title}}    
+                                        </div>
+                                        <div class="row">{{$item->category->name}}</div>
+                                    </div> 
+                                    <div class="col">
+                                        <span>1</span>
+                                    </div>
+                                    <div class="col price-label">RM {{number_format((double)$item->price, 2, '.', '');}}
+                                        <a href="{{route('user.cart.remove', $item->id)}}" class="close">&#10005;</a> 
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
                         <div class="text-center">
                             <img class="img-fluid" style="width:70%" src="{{asset('/img/empty-cart.png')}}" alt="">
                         </div>
-
-                    @else
-                        <!-- Cart Items -->
-                        @foreach ($cart_items as $item)
-                        <div class="row border-bottom">
-                            <div class="row main align-items-center"> 
-                                <div class="col-3"><img class="img-fluid" src="{{asset($item->images->first()->src)}}">
-                                </div> 
-                                <div class="col">
-                                    <div class="row text-muted">
-                                    {{$item->title}}    
-                                    </div>
-                                    <div class="row">{{$item->category->name}}</div>
-                                </div> 
-                                <div class="col">
-                                    <span>1</span>
-                                </div>
-                                <div class="col price-label">RM {{number_format((double)$item->price, 2, '.', '');}}
-                                    <a href="{{route('user.cart.remove', $item->id)}}" class="close">&#10005;</a> 
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
                     @endif
+
                     <!-- Back Home -->
                     <div class="back-to-shop mt-3">
-                        <a href="shopping-page.php">&leftarrow;<span class="text-muted ml-1">Back to shop</span></a>
+                        <a href="{{ route('user.shop') }}">&leftarrow;<span class="text-muted ml-1">Back to shop</span></a>
                     </div>
                 </div>
 
@@ -115,7 +115,7 @@
                     <hr>
                     <div class="row">
                         <!-- Total Item Quantity -->
-                        <div class="col text-lg">Quantity : {{$item_quantity}}</div>
+                        <div class="col text-lg">Quantity : {{$item_quantity ?? '0'}}</div>
                     </div>
                     <div>
                         <p  style="margin-top:23px;">PROMO CODE</p>
@@ -123,14 +123,23 @@
                     </div>
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL PRICE</div>
-                        <div id="total-price" class="col text-right" style="font-size:20px;">RM {{number_format((double)$total, 2, '.', '');}}
+                        <div id="total-price" class="col text-right" style="font-size:20px;">RM 
+                            @isset($total)
+                                {{ number_format((double)$total, 2, '.', '') }}    
+                            @else
+                                0.00
+                            @endisset
                         </div>
                     </div>
 
                     <!-- Place Order -->
-                    <button type="submit" class="btnn" id="place-order" @if ($item_quantity==0)
-                        disabled
-                    @endif>Place Order</button>
+                    <button type="submit" class="btnn" id="place-order" 
+                    @isset($item_quantity)
+                        @if ($item_quantity==0)
+                            disabled
+                        @endif
+                    @endisset
+                    >Place Order</button>
                     
                 </div>
                 <!-- Button Trigger Modal (Order Details) -->

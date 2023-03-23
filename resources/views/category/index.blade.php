@@ -213,7 +213,6 @@
 
 
     @section('script')
-        <script type="text/javascript">
 
         // Change image
         function changeImage(element) {
@@ -305,7 +304,7 @@
 
         
 
-        </script>
+
     @endsection
 
         

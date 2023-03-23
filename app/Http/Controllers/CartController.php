@@ -16,20 +16,24 @@ class CartController extends Controller
         
         // Get User's Products
         $user = Auth::user();
-        $cart_items = $user->cart->products()->with('images', 'category')->get();
 
-        // Cart Item Quantity
-        $item_quantity = $user->cart->product_qty; 
+        if($user->cart()->exists()){
+            $cart_items = $user->cart->products()->with('images', 'category')->get();
+            // Cart Item Quantity
+            $item_quantity = $user->cart->product_qty; 
 
-        $total = 0;
+            $total = 0;
 
-        // Add Image Src to Array
-        foreach($cart_items as $item){
-            $item['src'] = $item->images->first()->src;
-            $total += $item->price;
+            // Add Image Src to Array
+            foreach($cart_items as $item){
+                $item['src'] = $item->images->first()->src;
+                $total += $item->price;
+            }
+
+            return view('user.cart', compact('cart_items', 'item_quantity', 'total'));    
         }
 
-        return view('user.cart', compact('cart_items', 'item_quantity', 'total'));    
+        return view('user.cart');  
     }
 
 

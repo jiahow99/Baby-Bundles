@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="{{asset('css/header-style.css')}}">
         <link rel="stylesheet" href="{{asset('css/product-page.css')}}">
         <link rel="stylesheet" href="{{asset('css/accordian.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <!-- JQuery-->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <!-- JavaScript Bundle with Popper -->
@@ -31,6 +32,26 @@
     <body>
         {{-- Header Nav --}}
         <livewire:navigation />
+
+        {{-- Start Cart Sidebar --}}
+        <div class="p-0 m-0 position-fixed sidebar-cart">
+            <div class="col-12 pt-3 px-2 m-0">
+            <div class="col-11 p-0 m-0 mx-auto" id="sidebar_cart_container">
+                {{-- Cart header --}}
+                <div class="header col-12 p-0 m-0 mb-2 row justify-content-between">
+                <span class="col-5 p-0 m-0">Shopping Cart</span>
+                <span id="close_sidebar_cart" class="col-2 row m-0 close justify-content-center align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
+                </span>
+                </div>
+                <hr class="col-12 p-0 m-0 mb-3"></hr>
+                <a class="col-12 p-0 m-0 view-cart btn btn-primary text-center py-2 mb-4" href="{{ route('user.cart') }}">View Cart</a>
+    
+            </div>
+            
+            </div>
+        </div>
+        {{-- End Cart Sidebar --}}
         
         {{-- Main Content --}}
         <section style="padding-top:90px">
@@ -127,7 +148,63 @@
         <!-- Footer-->
         <x-header.footer></x-header.footer>
         
+        <script>
+        // Display sidebar cart contents
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        const cart_url = $('#cart-toggler').data('url');
+        const cart_index = "{{route('user.cart')}}";
+
+        $.ajax({
+            url: cart_url,
+            type: 'get',
+            dataType: 'JSON',
+            success:function(data)
+            {
+            var len = data.products.length;
+
+            for(i=0 ; i<len; i++){
+                let product = data.products[i];
+
+                var html = `<div class="product col-12 row justify-content-between p-0 m-0">
+                <a class="product-image col-3 p-0 m-0" href=${cart_index}>
+                <div class="col-12 p-0 m-0"><img src="{{ asset('${product.images[0].src}') }}" alt="" width="100%"></div>
+                </a>
+                <div class="product-details col-6 p-0 m-0">
+                <div class="col-12 p-0 m-0 .product-title-card" style="font-size: 15px;">${product.title}</div>
+                <div class="col-12 p-0 m-0" style="font-size: 16px; font-weight: 600; color: crimson !important">RM ${product.price}</div>
+                </div>
+            </div>
+            <hr class="col-12 p-0 m-0 my-3"></hr>`;
+
+                $('#sidebar_cart_container').append(html);
+            }        
+            }
+        });
+
+
+        // Open sidebar
+        $("#cart-toggler").click(function() {
+            $(".sidebar-cart").width("28%");
+            $(".blur-me").addClass('blur-bg');
+        });
+
+
+        // Close sidebar
+        $("#close_sidebar_cart").click(function(event) {
+            $(".sidebar-cart").width("0");
+            $(".blur-me").removeClass('blur-bg');
+        });
+
+    
         @yield('script')
+
+        </script>
+        <script src="{{asset('js/navbar-transition.js')}}"></script>
     </body>
-    <script src="{{asset('js/navbar-transition.js')}}"></script>
+    
 </html>
